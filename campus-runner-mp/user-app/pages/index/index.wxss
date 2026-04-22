@@ -1,0 +1,7 @@
+.form{padding:30rpx}
+.row{
+  display:flex;padding:20rpx;border-bottom:1rpx solid #eee;
+}
+text{width:140rpx}
+input{flex:1}
+button{margin-top:30rpx}

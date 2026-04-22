@@ -1,0 +1,11 @@
+.container{
+    padding: 120rpx 40rpx;
+    text-align: center;
+  }
+  .title{
+    font-size: 42rpx;
+    margin-bottom: 60rpx;
+  }
+  .login{
+    background:#07c160;color:#fff;border-radius:10rpx;
+  }

@@ -1,0 +1,7 @@
+<view wx:for="{{orderList}}" class="item">
+  <view>任务：{{item.type}}</view>
+  <view>取件：{{item.pick}}</view>
+  <view>收件：{{item.receive}}</view>
+  <view>酬金：{{item.money}} 元</view>
+  <view>状态：{{item.status}}</view>
+</view>

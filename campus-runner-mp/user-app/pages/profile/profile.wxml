@@ -1,0 +1,5 @@
+<view class="card">
+  <image src="{{user.avatarUrl}}"></image>
+  <view>昵称：{{user.nickName}}</view>
+  <view>余额：100.00 元</view>
+</view>
