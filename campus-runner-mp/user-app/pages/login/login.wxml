@@ -1,4 +1,21 @@
-<view class="container">
-  <view class="title">校园跑腿</view>
-  <button class="login" open-type="getUserProfile" bindtap="login">微信登录</button>
+<view class="login-page">
+  <view class="logo-area">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="title">校园跑腿</text>
+  </view>
+
+  <view class="form">
+    <view class="input-group">
+      <input class="input" placeholder="请输入账号" bindinput="inputUsername" value="{{username}}" />
+    </view>
+    <view class="input-group">
+      <input class="input" placeholder="请输入密码" password bindinput="inputPassword" value="{{password}}" />
+    </view>
+
+    <button class="login-btn" bindtap="login">登录</button>
+
+    <view class="register-link" bindtap="goRegister">
+      还没有账号？<text class="link-text">去注册</text>
+    </view>
+  </view>
 </view>

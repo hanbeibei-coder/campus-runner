@@ -1,7 +1,43 @@
-.form{padding:30rpx}
-.row{
-  display:flex;padding:20rpx;border-bottom:1rpx solid #eee;
+.page {
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 40rpx 30rpx;
 }
-text{width:140rpx}
-input{flex:1}
-button{margin-top:30rpx}
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40rpx;
+  color: #333;
+}
+.form {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+  padding: 30rpx 0;
+}
+.label {
+  width: 160rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+.input, .picker {
+  flex: 1;
+  font-size: 30rpx;
+  color: #666;
+}
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 50rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  margin-top: 60rpx;
+}

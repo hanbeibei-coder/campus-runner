@@ -1,0 +1,21 @@
+<view class="register-page">
+  <view class="form">
+    <view class="header">
+      <text class="title">创建账号</text>
+      <text class="desc">注册后即可发布/接取校园订单</text>
+    </view>
+
+    <view class="input-group">
+      <input class="input" placeholder="设置你的账号" bindinput="inputUsername" value="{{username}}" />
+    </view>
+    <view class="input-group">
+      <input class="input" placeholder="设置你的密码" password bindinput="inputPassword" value="{{password}}" />
+    </view>
+
+    <button class="register-btn" bindtap="register">立即注册</button>
+
+    <view class="login-link" bindtap="goLogin">
+      已有账号？<text class="link-text">返回登录</text>
+    </view>
+  </view>
+</view>

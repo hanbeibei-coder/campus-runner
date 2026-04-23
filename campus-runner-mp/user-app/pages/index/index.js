@@ -1,21 +1,30 @@
 Page({
-  data: { type: '', pick: '', receive: '', money: '' },
-  setType(e) { this.setData({ type: e.detail.value }) },
-  setPick(e) { this.setData({ pick: e.detail.value }) },
-  setReceive(e) { this.setData({ receive: e.detail.value }) },
-  setMoney(e) { this.setData({ money: e.detail.value }) },
-  publish() {
-    let order = {
-      id: Date.now(),
-      type: this.data.type,
-      pick: this.data.pick,
-      receive: this.data.receive,
-      money: this.data.money,
-      status: '待接单'
-    }
-    let list = wx.getStorageSync('orderList') || []
-    list.unshift(order)
-    wx.setStorageSync('orderList', list)
-    wx.showToast({ title: '发布成功' })
+  data: {
+    typeList: ["代取快递", "代买饭"],
+    typeIndex: 0,
+    pickAddr: "",
+    receiveAddr: "",
+    money: ""
+  },
+
+  selectType(e) {
+    this.setData({ typeIndex: e.detail.value })
+  },
+
+  inputPickAddr(e) {
+    this.setData({ pickAddr: e.detail.value })
+  },
+
+  inputReceiveAddr(e) {
+    this.setData({ receiveAddr: e.detail.value })
+  },
+
+  inputMoney(e) {
+    this.setData({ money: e.detail.value })
+  },
+
+  publishOrder() {
+    // 这里等后端订单接口写完，再改成 wx.request
+    wx.showToast({ title: "订单发布成功", icon: "success" })
   }
 })

@@ -1,19 +1,29 @@
-<view class="form">
-  <view class="row">
-    <text>任务类型</text>
-    <input bindinput="setType" placeholder="代取快递/代买饭"></input>
+<view class="page">
+  <view class="title">发布跑腿订单</view>
+
+  <view class="form">
+    <view class="form-item">
+      <text class="label">任务类型</text>
+      <picker bindchange="selectType" value="{{typeIndex}}" range="{{typeList}}">
+        <view class="picker">{{typeList[typeIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">取件地址</text>
+      <input class="input" placeholder="请输入取件地址" bindinput="inputPickAddr" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">收件地址</text>
+      <input class="input" placeholder="请输入收件地址" bindinput="inputReceiveAddr" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">酬金</text>
+      <input class="input" type="number" placeholder="请输入金额" bindinput="inputMoney" />
+    </view>
+
+    <button class="submit-btn" bindtap="publishOrder">发布订单</button>
   </view>
-  <view class="row">
-    <text>取件地址</text>
-    <input bindinput="setPick" placeholder="输入取件地址"></input>
-  </view>
-  <view class="row">
-    <text>收件地址</text>
-    <input bindinput="setReceive" placeholder="输入收件地址"></input>
-  </view>
-  <view class="row">
-    <text>酬金</text>
-    <input type="digit" bindinput="setMoney" placeholder="金额"></input>
-  </view>
-  <button type="primary" bindtap="publish">发布订单</button>
 </view>
