@@ -11,6 +11,6 @@ public interface OrderMapper {
             "VALUES(#{content}, #{phone}, #{address}, #{money}, #{userId})")
     int insert(Order order);
 
-    @Select("SELECT * FROM orders ORDER BY id DESC")
-    List<Order> selectAll();
+    @Select("SELECT * FROM orders WHERE user_id = #{userId} ORDER BY id DESC")
+    List<Order> selectByUserId(Integer userId);
 }

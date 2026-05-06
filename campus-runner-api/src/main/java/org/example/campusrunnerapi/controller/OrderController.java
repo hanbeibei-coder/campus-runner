@@ -15,24 +15,18 @@ public class OrderController {
     @Autowired
     private OrderMapper orderMapper;
 
-    // 发布订单接口（POST）
     @PostMapping("/add")
     public Map<String, Object> addOrder(@RequestBody Order order) {
-        // 默认写死user_id=1，后续可改为登录用户ID
-        order.setUserId(1);
         orderMapper.insert(order);
-
         Map<String, Object> result = new HashMap<>();
         result.put("code", 200);
         result.put("msg", "发布成功");
         return result;
     }
 
-    // 获取订单列表接口（GET）
     @GetMapping("/list")
-    public Map<String, Object> listOrders() {
-        List<Order> list = orderMapper.selectAll();
-
+    public Map<String, Object> listOrders(@RequestParam Integer userId) {
+        List<Order> list = orderMapper.selectByUserId(userId);
         Map<String, Object> result = new HashMap<>();
         result.put("code", 200);
         result.put("data", list);
