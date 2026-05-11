@@ -1,58 +1,117 @@
 <template>
-  <view class="container">
-    <view class="title">发布跑腿订单</view>
-    <view class="form">
-      <view class="item">
-        <text>任务内容</text>
-        <input v-model="form.content" placeholder="请输入" />
+  <view class="wrap">
+    <view class="home-header">
+      <text class="title">校园跑腿服务</text>
+      <text class="sub">随时随地 · 帮你代办</text>
+    </view>
+
+    <view class="card-box">
+      <!-- 我要下单 → 跳发布订单 -->
+      <view class="func-card" @click="goPublish">
+        <view class="icon">📦</view>
+        <view class="name">我要下单</view>
       </view>
-      <view class="item">
-        <text>联系电话</text>
-        <input v-model="form.phone" placeholder="请输入" />
+
+      <!-- 帮我跑腿 -->
+      <view class="func-card" @click="goRun">
+        <view class="icon">🏃</view>
+        <view class="name">帮我跑腿</view>
       </view>
-      <view class="item">
-        <text>地址</text>
-        <input v-model="form.address" placeholder="请输入" />
+    </view>
+
+    <view class="desc-card">
+      <view class="desc-title">服务介绍</view>
+      <view class="desc-text">
+        校园内取快递、买奶茶、代排队、代办琐事，一键下单，专人速达。
       </view>
-      <view class="item">
-        <text>酬金(元)</text>
-        <input v-model="form.money" type="number" placeholder="请输入" />
-      </view>
-      <button type="primary" @click="submit">发布订单</button>
     </view>
   </view>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script>
+export default {
+  methods: {
+    // ✅ 去发布订单（100%能跳）
+    goPublish() {
+      uni.switchTab({
+        url: "/pages/publish/publish"
+      })
+    },
 
-const form = ref({
-  content: '',
-  phone: '',
-  address: '',
-  money: ''
-})
-
-// 发布订单 → 调用后端接口
-const submit = () => {
-  uni.request({
-    url: 'http://localhost:8080/order/add',
-    method: 'POST',
-    data: form.value,
-    success(res) {
-      if (res.data.code === 200) {
-        uni.showToast({ title: '发布成功' })
-        form.value = { content: '', phone: '', address: '', money: '' }
-      }
+    // ✅ 帮我跑腿（有提示）
+    goRun() {
+      uni.showToast({
+        title: "欢迎使用跑腿服务",
+        icon: "none"
+      })
     }
-  })
+  }
 }
 </script>
 
 <style scoped>
-.container { padding: 30rpx; }
-.title { font-size: 40rpx; font-weight: bold; text-align: center; margin: 20rpx 0 40rpx; }
-.form .item { margin-bottom: 30rpx; }
-.form text { display: block; margin-bottom: 10rpx; }
-.form input { border: 1px solid #eee; padding: 20rpx; border-radius: 10rpx; }
+.wrap {
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 30rpx;
+}
+
+.home-header {
+  background: linear-gradient(135deg, #36c1ff, #409eff);
+  border-radius: 30rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+.title {
+  font-size: 44rpx;
+  color: #fff;
+  font-weight: bold;
+}
+.sub {
+  font-size: 26rpx;
+  color: #e6f2ff;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.card-box {
+  display: flex;
+  justify-content: space-between;
+}
+.func-card {
+  width: 47%;
+  background: #fff;
+  border-radius: 24rpx;
+  text-align: center;
+  padding: 40rpx 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(64,158,255,0.1);
+}
+.icon {
+  font-size: 60rpx;
+  margin-bottom: 20rpx;
+}
+.name {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.desc-card {
+  margin-top: 40rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 6rpx 20rpx rgba(64,158,255,0.1);
+}
+.desc-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+.desc-text {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.7;
+}
 </style>

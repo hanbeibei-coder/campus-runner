@@ -1,45 +1,138 @@
 <template>
-  <view class="box">
-    <view class="title">用户注册</view>
-    <view class="form">
-      <input v-model="username" placeholder="请输入账号" class="input" />
-      <input v-model="password" placeholder="请输入密码" class="input" password />
-      <button type="primary" @click="register">注册</button>
-      <view class="tip" @click="goBack">已有账号？返回登录</view>
+  <view class="container">
+    <!-- 顶部渐变区域 -->
+    <view class="top-banner">
+      <view class="logo-text">账号注册</view>
+      <view class="sub-text">注册账号 · 开启校园跑腿服务</view>
+    </view>
+
+    <!-- 注册卡片 -->
+    <view class="register-card">
+      <view class="input-row">
+        <input v-model="username" placeholder="请设置账号" />
+      </view>
+      <view class="input-row">
+        <input v-model="password" password placeholder="请设置密码" />
+      </view>
+      <view class="input-row">
+        <input v-model="repwd" password placeholder="请再次输入密码" />
+      </view>
+
+      <view class="register-btn" @click="register">
+        立即注册
+      </view>
+
+      <view class="login-txt" @click="goLogin">
+        已有账号？去登录
+      </view>
     </view>
   </view>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-const username = ref('')
-const password = ref('')
-
-// 注册请求 → 后端接口代码
-const register = () => {
-  uni.request({
-    url: 'http://localhost:8080/user/register',
-    method: 'POST',
-    data: {
-      username: username.value,
-      password: password.value
-    },
-    success(res) {
-      console.log(res.data)
-      if (res.data.code === 200) {
-        uni.showToast({ title: '注册成功' })
-        setTimeout(() => uni.navigateBack(), 1500)
-      }
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      repwd: ""
     }
-  })
-}
+  },
+  methods: {
+    register() {
+      // 非空校验
+      if (!this.username.trim()) {
+        uni.showToast({ title: "请输入账号", icon: "none" })
+        return
+      }
+      if (!this.password.trim()) {
+        uni.showToast({ title: "请输入密码", icon: "none" })
+        return
+      }
+      if (this.password !== this.repwd) {
+        uni.showToast({ title: "两次密码不一致", icon: "none" })
+        return
+      }
 
-const goBack = () => uni.navigateBack()
+      uni.showToast({ title: "注册成功" })
+      setTimeout(() => {
+        uni.navigateTo({
+          url: "/pages/login/login"
+        })
+      }, 800)
+    },
+    goLogin() {
+      uni.navigateTo({
+        url: "/pages/login/login"
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
-.box { padding: 100rpx 40rpx; }
-.title { font-size: 50rpx; font-weight: bold; text-align: center; margin-bottom: 80rpx; }
-.form .input { border: 1px solid #eee; border-radius: 10rpx; padding: 25rpx; margin-bottom: 30rpx; }
-.tip { text-align: center; color: #007aff; margin-top: 30rpx; }
+.container {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 顶部渐变 和登录页一模一样 */
+.top-banner {
+  height: 420rpx;
+  background: linear-gradient(135deg, #36c1ff, #409eff);
+  border-bottom-left-radius: 80rpx;
+  border-bottom-right-radius: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logo-text {
+  font-size: 52rpx;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 6rpx;
+}
+.sub-text {
+  font-size: 26rpx;
+  color: #e8f4ff;
+  margin-top: 12rpx;
+}
+
+/* 注册卡片 */
+.register-card {
+  width: 84%;
+  margin: -100rpx auto 0;
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: 0 10rpx 30rpx rgba(64,158,255,0.15);
+}
+
+.input-row {
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
+}
+.input-row input {
+  height: 86rpx;
+  font-size: 30rpx;
+}
+
+.register-btn {
+  margin-top: 40rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #36c1ff, #409eff);
+  color: #fff;
+  border-radius: 42rpx;
+  font-size: 32rpx;
+}
+
+.login-txt {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #409eff;
+}
 </style>
